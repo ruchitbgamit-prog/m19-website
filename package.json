@@ -1,0 +1,9 @@
+{
+  "name": "m19",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix m19-website",
+    "build": "npm run build --prefix m19-website",
+    "preview": "npm run preview --prefix m19-website"
+  }
+}

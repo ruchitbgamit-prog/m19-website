@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build --prefix m19-website",
+  "outputDirectory": "m19-website/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}

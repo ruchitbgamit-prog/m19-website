@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+.vercel
+
+# Legacy local archive (not needed for deploy; keep on disk only)
+_archive
+
+# Cursor IDE config (local only — not part of the website repo)
+.cursor
