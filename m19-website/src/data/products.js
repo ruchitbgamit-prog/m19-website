@@ -7,7 +7,7 @@ export const PRODUCTS = [
     cat: "Filter Testing",
     color: C.teal,
     icon: "🔬",
-    badge: "Most Popular",
+    badge: "",
     desc: "MFC-based precision measurement with full 21 CFR Part 11 compliance and electronic audit trail.",
     specs: [
       { l: "Test Methods", v: "Bubble Point, Diffusion, WIT" },
@@ -39,7 +39,7 @@ export const PRODUCTS = [
     cat: "Pore Characterisation",
     color: C.navyMid,
     icon: "📡",
-    badge: "New",
+    badge: "",
     desc: "Complete pore size distribution 0.01μm – 500μm. Capillary flow porometry with PoreSense Analytics.",
     specs: [
       { l: "Pore Range", v: "0.01μm – 500μm" },

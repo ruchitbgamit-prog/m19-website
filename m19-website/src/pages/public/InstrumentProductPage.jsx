@@ -1,4 +1,4 @@
-import { PRODUCTS } from "../../data/products.js";
+import { MACHINE_IMAGE_MAP, PRODUCTS } from "../../data/products.js";
 import { HP500_PAGE } from "../../data/hp500Content.js";
 import { Btn, Eyebrow, Mono, Serif } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";

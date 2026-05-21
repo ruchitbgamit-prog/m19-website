@@ -6,7 +6,12 @@ import { DevInstrumentStory } from "../../components/developer/DevInstrumentStor
 import { Btn, Eyebrow, Mono, Serif } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";
 
-export function InstrumentsPage({onQuote,onRegister,showFiaPowered=false,showFlip=false,showStory=false,showIndustryFilter=false,showIndustryClassification=false}){
+export function InstrumentsPage({onQuote,onRegister,onProductNav,showFiaPowered=false,showFlip=false,showStory=false,showIndustryFilter=false,showIndustryClassification=false}){
+  const goToProduct=(model,e)=>{
+    e?.preventDefault?.();
+    if(onProductNav) onProductNav(model);
+    else window.location.assign(productPathFromModel(model));
+  };
   const [flippedModel,setFlippedModel]=useState(null);
   const [industry,setIndustry]=useState("All");
   const industryIconMap={
@@ -142,13 +147,23 @@ export function InstrumentsPage({onQuote,onRegister,showFiaPowered=false,showFli
                 const pHref=productPathFromModel(p.model);
                 return(
                   <div key={p.model} className="product-card" style={{"--hover-color":p.color}} onMouseEnter={e=>e.currentTarget.style.borderBottomColor=p.color} onMouseLeave={e=>e.currentTarget.style.borderBottomColor="transparent"}>
-                    <div style={{padding:"28px 28px 0",minHeight:120,display:"flex",flexDirection:"column",justifyContent:"flex-start"}}>
+                    <button
+                      type="button"
+                      onClick={(e)=>goToProduct(p.model,e)}
+                      style={{padding:"28px 28px 0",minHeight:120,display:"flex",flexDirection:"column",justifyContent:"flex-start",width:"100%",textAlign:"left",background:"transparent",border:"none",cursor:"pointer"}}
+                    >
                       {p.badge&&<div style={{display:"inline-block",padding:"3px 10px",background:p.color,color:C.white,fontSize:10,fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:8}}>{p.badge}</div>}
                       <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,color:p.color,letterSpacing:2,textTransform:"uppercase",marginBottom:4}}>{p.cat}</div>
                       <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,color:C.navy}}>{p.model}</div>
                       <div style={{fontSize:13,color:C.grey,marginTop:4}}>{p.name}</div>
-                    </div>
-                    <a href={pHref} className="instrument-visual" style={{display:"block",textDecoration:"none",color:"inherit"}}>
+                    </button>
+                    <a
+                      href={pHref}
+                      className="instrument-visual"
+                      style={{display:"block",textDecoration:"none",color:"inherit",cursor:"pointer"}}
+                      onClick={(e)=>goToProduct(p.model,e)}
+                      aria-label={`View ${p.model} — ${p.name}`}
+                    >
                       {machineImage
                         ? <img src={machineImage} alt={`${p.model} — ${p.name}`} loading="lazy" decoding="async" style={{...machineImageStyle,width:"100%",height:"auto"}}/>
                         : <span style={{fontSize:56}}>{p.icon}</span>}
@@ -163,7 +178,7 @@ export function InstrumentsPage({onQuote,onRegister,showFiaPowered=false,showFli
                       ))}
                     </div>
                     <div style={{padding:"16px 28px 24px",display:"flex",gap:10,marginTop:"auto",borderTop:"1px solid rgba(15,23,42,0.05)"}}>
-                      <Btn variant="teal" style={{flex:1,padding:10,fontSize:11}} onClick={()=>window.location.assign(pHref)}>Read more</Btn>
+                      <Btn variant="teal" style={{flex:1,padding:10,fontSize:11}} onClick={()=>goToProduct(p.model)}>Read more</Btn>
                       <Btn variant="ghost" style={{flex:1,padding:10,fontSize:11,color:C.navy,borderColor:C.greyLt}} onClick={onQuote}>Request quote</Btn>
                     </div>
                   </div>
@@ -195,7 +210,13 @@ export function InstrumentsPage({onQuote,onRegister,showFiaPowered=false,showFli
                         <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,color:C.navy}}>{p.model}</div>
                         <div style={{fontSize:13,color:C.grey,marginTop:4}}>{p.name}</div>
                       </div>
-                      <a href={pHref} className="instrument-visual" style={{display:"block",textDecoration:"none",color:"inherit"}} onClick={e=>e.stopPropagation()}>
+                      <a
+                        href={pHref}
+                        className="instrument-visual"
+                        style={{display:"block",textDecoration:"none",color:"inherit",cursor:"pointer"}}
+                        onClick={(e)=>{e.stopPropagation();goToProduct(p.model,e);}}
+                        aria-label={`View ${p.model} — ${p.name}`}
+                      >
                         {machineImage
                           ? <img src={machineImage} alt={`${p.model} — ${p.name}`} loading="lazy" decoding="async" style={machineImageStyle}/>
                           : <span style={{fontSize:56}}>{p.icon}</span>}
@@ -218,7 +239,7 @@ export function InstrumentsPage({onQuote,onRegister,showFiaPowered=false,showFli
                         ))}
                       </div>
                       <div style={{padding:"16px 28px 24px",display:"flex",gap:10,marginTop:"auto",borderTop:"1px solid rgba(15,23,42,0.05)",flexWrap:"wrap"}}>
-                        <Btn variant="teal" style={{flex:1,padding:10,fontSize:11,minWidth:120}} onClick={e=>{e.stopPropagation();window.location.assign(pHref);}}>Read more</Btn>
+                        <Btn variant="teal" style={{flex:1,padding:10,fontSize:11,minWidth:120}} onClick={e=>{e.stopPropagation();goToProduct(p.model);}}>Read more</Btn>
                         <Btn variant="teal" style={{flex:1,padding:10,fontSize:11,minWidth:120}} onClick={e=>{e.stopPropagation();onRegister();}}>Get quote</Btn>
                         <Btn variant="ghost" style={{flex:1,padding:10,fontSize:11,color:C.navy,borderColor:C.greyLt,minWidth:120}} onClick={e=>{e.stopPropagation();onQuote();}}>Download spec</Btn>
                       </div>

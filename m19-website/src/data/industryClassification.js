@@ -37,18 +37,18 @@ function makeGlow(hex){
 
 export const INDUSTRY_META = {
   All: { label: "All", color: "#000000" },
-  Defense: { label: "Defense", color: "#5B7742", glow: makeGlow("#5B7742") },
-  Space: { label: "Space research", color: "#8784DB", glow: makeGlow("#8784DB") },
-  "Oil & Gas": { label: "Oil & gas", color: "#EB5E00", glow: makeGlow("#EB5E00") },
-  "Air filtration": { label: "Air filtration", color: "#707070", glow: makeGlow("#707070") },
-  "Water purification": { label: "Water filtration", color: "#00C7C8", glow: makeGlow("#00C7C8") },
-  Pharma: { label: "Pharma", color: "#FF0099", glow: makeGlow("#FF0099") },
-  "Technical textile": { label: "Technical textile", color: "#EE779D", glow: makeGlow("#EE779D") },
-  Energy: { label: "Energy", color: "#3EA055", glow: makeGlow("#3EA055") },
-  Chemical: { label: "Chemical", color: "#B156D6", glow: makeGlow("#B156D6") },
-  Packaging: { label: "Packaging", color: "#CB8962", glow: makeGlow("#CB8962") },
-  "Personal hygiene": { label: "Personal hygiene", color: "#F97272", glow: makeGlow("#F97272") },
-  Biotech: { label: "Biotech", color: "#105955", glow: makeGlow("#105955") },
+  Defense: { label: "Defense", color: "#5B7742", glow: makeGlow("#5B7742"), icon: "Defense.png" },
+  Space: { label: "Space research", color: "#8784DB", glow: makeGlow("#8784DB"), icon: "Space Research.png" },
+  "Oil & Gas": { label: "Oil & gas", color: "#EB5E00", glow: makeGlow("#EB5E00"), icon: "oil-gas.png" },
+  "Air filtration": { label: "Air filtration", color: "#707070", glow: makeGlow("#707070"), icon: "Air Filtration.png" },
+  "Water purification": { label: "Water filtration", color: "#00C7C8", glow: makeGlow("#00C7C8"), icon: "Water Filtration.png" },
+  Pharma: { label: "Pharma", color: "#FF0099", glow: makeGlow("#FF0099"), icon: "pharma.png" },
+  "Technical textile": { label: "Technical textile", color: "#EE779D", glow: makeGlow("#EE779D"), icon: "Technical Textile.png" },
+  Energy: { label: "Energy", color: "#3EA055", glow: makeGlow("#3EA055"), icon: "Energy.png" },
+  Chemical: { label: "Chemical", color: "#B156D6", glow: makeGlow("#B156D6"), icon: "Chemical.png" },
+  Packaging: { label: "Packaging", color: "#CB8962", glow: makeGlow("#CB8962"), icon: "Packaging.png" },
+  "Personal hygiene": { label: "Personal hygiene", color: "#F97272", glow: makeGlow("#F97272"), icon: "Personal Hygiene.png" },
+  Biotech: { label: "Biotech", color: "#105955", glow: makeGlow("#105955"), icon: "Biotech.png" },
 };
 
 export const INDUSTRIES = Object.keys(INDUSTRY_META);

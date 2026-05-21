@@ -33,7 +33,9 @@ export function IndustryNavMenu({triggerClassName}){
       </span>
       {open&&(
         <div className="pub-nav-dropdown-panel" role="menu" aria-label="Industries">
-          {industryItems.map(k=>(
+          {industryItems.map(k=>{
+            const iconFile=INDUSTRY_META[k]?.icon;
+            return(
             <a
               key={k}
               className="pub-nav-dd-item"
@@ -41,13 +43,15 @@ export function IndustryNavMenu({triggerClassName}){
               href={industryHref(k)}
               style={{"--dd-accent":(INDUSTRY_META?.[k]?.color)||"#1FC1C6"}}
             >
-              <span style={{display:"inline-flex",alignItems:"center",gap:10}}>
-                <span className="pub-nav-dd-dot" aria-hidden />
+              <span style={{display:"inline-flex",alignItems:"center",gap:12}}>
+                {iconFile
+                  ? <img src={`/icons/${encodeURIComponent(iconFile)}`} alt="" aria-hidden width={20} height={20} style={{width:20,height:20,objectFit:"contain",flexShrink:0}}/>
+                  : <span className="pub-nav-dd-dot" aria-hidden />}
                 <span>{INDUSTRY_META[k]?.label || k}</span>
               </span>
-              <span style={{opacity:0.55}}>→</span>
             </a>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>

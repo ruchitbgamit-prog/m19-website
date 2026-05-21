@@ -1,10 +1,11 @@
 import { INDUSTRY_CONTENT } from "../../data/industryContent.js";
 import { INDUSTRY_META, INDUSTRY_TO_MODELS } from "../../data/industryClassification.js";
-import { PRODUCTS } from "../../data/products.js";
+import { MACHINE_IMAGE_MAP, PRODUCTS } from "../../data/products.js";
+import { productPathFromModel } from "../../data/productPaths.js";
 import { Btn, Eyebrow, Mono, Serif, UIIcon } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";
 
-export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav}){
+export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav,onProductNav}){
   const G={
     text:C.white,
     muted:"rgba(139,173,212,0.82)",
@@ -139,16 +140,21 @@ export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav}){
                       {row.standards.join(", ")}
                     </div>
                     <div style={{display:"flex",flexWrap:"wrap",gap:10}}>
-                      <button type="button" style={pill} onClick={()=>window.location.assign(pHref)}>Read more</button>
+                      <button type="button" style={pill} onClick={()=>onProductNav?onProductNav(row.model):window.location.assign(pHref)}>Read more</button>
                       <a href={content.brochureUrl} target="_blank" rel="noopener noreferrer" style={{...pill,textDecoration:"none",display:"inline-flex",alignItems:"center"}}>
                         Brochure
                       </a>
                       <button type="button" style={pill} onClick={onQuote}>Request quote</button>
                     </div>
                   </div>
-                  <div style={{order:2,borderRadius:18,overflow:"hidden",border:`1px solid ${G.line}`,background:"rgba(255,255,255,0.06)",backdropFilter:"blur(8px)"}}>
+                  <a
+                    href={pHref}
+                    onClick={(e)=>{e.preventDefault();onProductNav?onProductNav(row.model):window.location.assign(pHref);}}
+                    style={{order:2,borderRadius:18,overflow:"hidden",border:`1px solid ${G.line}`,background:"rgba(255,255,255,0.06)",backdropFilter:"blur(8px)",display:"block",cursor:"pointer"}}
+                    aria-label={`View ${row.model}`}
+                  >
                     {img?<img src={img} alt={row.headline} style={{width:"100%",height:"auto",display:"block",objectFit:"contain"}}/>:null}
-                  </div>
+                  </a>
                 </div>
               );
             })}
@@ -232,11 +238,11 @@ export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav}){
   );
 }
 
-export function IndustryPage({industryKey,onQuote,onRegister,onNav}){
+export function IndustryPage({industryKey,onQuote,onRegister,onNav,onProductNav}){
   const meta=INDUSTRY_META[industryKey]||{label:industryKey||"Industry",color:C.teal,glow:C.teal};
   const content=INDUSTRY_CONTENT?.[industryKey]||null;
   if(content&&(content.layout==="defense"||content.layout==="brochure")){
-    return <BrochureIndustryPage content={content} meta={meta} onQuote={onQuote} onRegister={onRegister} onNav={onNav}/>;
+    return <BrochureIndustryPage content={content} meta={meta} onQuote={onQuote} onRegister={onRegister} onNav={onNav} onProductNav={onProductNav}/>;
   }
   const models=INDUSTRY_TO_MODELS[industryKey]||[];
   const set=new Set(models);
@@ -320,7 +326,13 @@ export function IndustryPage({industryKey,onQuote,onRegister,onNav}){
                     <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:36,fontWeight:700,color:C.navy}}>{p.model}</div>
                     <div style={{fontSize:13,color:C.grey,marginTop:4}}>{p.name}</div>
                   </div>
-                  <a href={pHref} className="instrument-visual" style={{display:"block",textDecoration:"none",color:"inherit"}}>
+                  <a
+                    href={pHref}
+                    className="instrument-visual"
+                    style={{display:"block",textDecoration:"none",color:"inherit",cursor:"pointer"}}
+                    onClick={(e)=>{e.preventDefault();onProductNav?onProductNav(p.model):window.location.assign(pHref);}}
+                    aria-label={`View ${p.model} — ${p.name}`}
+                  >
                     {machineImage ? <img src={machineImage} alt={`${p.model} — ${p.name}`} loading="lazy" decoding="async"/> : null}
                   </a>
                   <div style={{padding:"0 28px 16px",fontSize:13,color:C.grey,lineHeight:1.6,minHeight:92}}>{p.desc}</div>
@@ -336,7 +348,7 @@ export function IndustryPage({industryKey,onQuote,onRegister,onNav}){
                     <Btn
                       variant="teal"
                       style={{flex:1,padding:10,fontSize:11}}
-                      onClick={()=>window.location.assign(pHref)}
+                      onClick={()=>onProductNav?onProductNav(p.model):window.location.assign(pHref)}
                     >
                       Read more
                     </Btn>

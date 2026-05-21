@@ -20,13 +20,14 @@ import { IndustryPage } from "./pages/public/IndustryPage.jsx";
 import { InstrumentProductPage } from "./pages/public/InstrumentProductPage.jsx";
 import { InstrumentsPage } from "./pages/public/InstrumentsPage.jsx";
 import { PlatformPage } from "./pages/public/PlatformPage.jsx";
+import { ThankYouPage } from "./pages/public/ThankYouPage.jsx";
 
 export default function App() {
   const [appView, setAppView] = useState("website");
   const [user, setUser] = useState(null);
   const [adminUser, setAdminUser] = useState(null);
   const [showQuote, setShowQuote] = useState(false);
-  const { pubPage, industryKey, productModel, handleNav } = useAppRouting();
+  const { pubPage, industryKey, productModel, handleNav, navigateToProduct } = useAppRouting();
 
   const handleLogin = (account) => {
     setUser(account);
@@ -73,7 +74,12 @@ export default function App() {
 
           <main key={`${pubPage}-${productModel || ""}`}>
             {pubPage === "home" && (
-              <HomePage onNav={handleNav} onQuote={openQuote} onRegister={openRegister} />
+              <HomePage
+                onNav={handleNav}
+                onProductNav={navigateToProduct}
+                onQuote={openQuote}
+                onRegister={openRegister}
+              />
             )}
             {pubPage === "platform" && (
               <PlatformPage onQuote={openQuote} onRegister={openRegister} />
@@ -82,6 +88,7 @@ export default function App() {
               <InstrumentsPage
                 onQuote={openQuote}
                 onRegister={openRegister}
+                onProductNav={navigateToProduct}
                 showIndustryFilter
               />
             )}
@@ -91,6 +98,7 @@ export default function App() {
                 onQuote={openQuote}
                 onRegister={openRegister}
                 onNav={handleNav}
+                onProductNav={navigateToProduct}
               />
             )}
             {pubPage === "product" && (
@@ -103,6 +111,9 @@ export default function App() {
             )}
             {pubPage === "about" && (
               <AboutPage onNav={handleNav} onRegister={openRegister} />
+            )}
+            {pubPage === "thank-you" && (
+              <ThankYouPage onNav={handleNav} onRegister={openRegister} />
             )}
           </main>
 
@@ -144,6 +155,10 @@ export default function App() {
               onRegister={() => {
                 setShowQuote(false);
                 openRegister();
+              }}
+              onSubmitted={() => {
+                setShowQuote(false);
+                handleNav("thank-you");
               }}
             />
           )}

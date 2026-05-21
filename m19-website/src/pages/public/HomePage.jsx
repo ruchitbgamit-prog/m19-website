@@ -7,7 +7,7 @@ import { PartnersSection } from "../../components/public/PartnersSection.jsx";
 import { Btn, Eyebrow, Serif, UIIcon } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";
 
-export function HomePage({onNav,onQuote,onRegister}){
+export function HomePage({onNav,onProductNav,onQuote,onRegister}){
   const iconUrl=(file)=>`/icons/${encodeURIComponent(file)}`;
   const OVERVIEW_INDUSTRIES=[
     {routeKey:"Defense",label:"Defense",icon:"Defense.png",accent:INDUSTRY_META.Defense.color,glow:INDUSTRY_META.Defense.glow},
@@ -112,6 +112,7 @@ export function HomePage({onNav,onQuote,onRegister}){
                 key={p.model}
                 href={productPathFromModel(p.model)}
                 style={{background:C.white,padding:"24px",cursor:"pointer",transition:"all 0.2s",borderBottom:"3px solid transparent",boxShadow:"0 2px 12px rgba(2,6,23,0.06)",textDecoration:"none",color:"inherit",display:"block"}}
+                onClick={(e)=>{e.preventDefault();onProductNav?.(p.model);}}
                 onMouseEnter={e=>{e.currentTarget.style.borderBottomColor=p.color;e.currentTarget.style.transform="translateY(-4px)";}}
                 onMouseLeave={e=>{e.currentTarget.style.borderBottomColor="transparent";e.currentTarget.style.transform="translateY(0)";}}
               >

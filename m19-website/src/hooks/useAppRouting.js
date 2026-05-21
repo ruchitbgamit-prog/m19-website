@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { LAB_TESTING_EXTERNAL_URL } from "../config/site.js";
 import { INDUSTRY_META } from "../data/industryClassification.js";
-import { modelFromProductSlug } from "../data/productPaths.js";
+import { modelFromProductSlug, productPathFromModel } from "../data/productPaths.js";
 
 const INDUSTRY_SLUG_ALIASES = {
   defence: "Defense",
@@ -35,7 +35,8 @@ export function useAppRouting() {
       return;
     }
 
-    if (parts[0]?.toLowerCase() === "products") {
+    const catalogSegment = parts[0]?.toLowerCase();
+    if (catalogSegment === "products" || catalogSegment === "instruments") {
       setIndustryKey(null);
       if (parts[1]) {
         setProductModel(modelFromProductSlug(parts[1]));
@@ -72,12 +73,24 @@ export function useAppRouting() {
         window.location.assign(LAB_TESTING_EXTERNAL_URL);
         return;
       }
-      window.history.pushState({}, "", page === "home" ? "/" : `/${page}`);
+      const path =
+        page === "home" ? "/" : page === "instruments" ? "/Products" : `/${page}`;
+      window.history.pushState({}, "", path);
       parseRoute();
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     [parseRoute],
   );
 
-  return { pubPage, industryKey, productModel, handleNav };
+  const navigateToProduct = useCallback(
+    (model) => {
+      if (!model) return;
+      window.history.pushState({}, "", productPathFromModel(model));
+      parseRoute();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    [parseRoute],
+  );
+
+  return { pubPage, industryKey, productModel, handleNav, navigateToProduct };
 }
