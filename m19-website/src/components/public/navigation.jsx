@@ -34,20 +34,29 @@ export function IndustryNavMenu({triggerClassName}){
       {open&&(
         <div className="pub-nav-dropdown-panel" role="menu" aria-label="Industries">
           {industryItems.map(k=>{
-            const iconFile=INDUSTRY_META[k]?.icon;
+            const meta=INDUSTRY_META[k];
+            const iconFile=meta?.icon;
+            const accent=meta?.color||"#1FC1C6";
+            const glow=meta?.glow||accent;
+            const iconUrl=iconFile?`/icons/${encodeURIComponent(iconFile)}`:null;
             return(
             <a
               key={k}
               className="pub-nav-dd-item"
               role="menuitem"
               href={industryHref(k)}
-              style={{"--dd-accent":(INDUSTRY_META?.[k]?.color)||"#1FC1C6"}}
+              onClick={()=>setOpen(false)}
+              style={{
+                "--dd-accent":accent,
+                "--dd-glow":glow,
+                ...(iconUrl?{"--dd-icon-url":`url("${iconUrl}")`}:{}),
+              }}
             >
-              <span style={{display:"inline-flex",alignItems:"center",gap:12}}>
-                {iconFile
-                  ? <img src={`/icons/${encodeURIComponent(iconFile)}`} alt="" aria-hidden width={20} height={20} style={{width:20,height:20,objectFit:"contain",flexShrink:0}}/>
+              <span className="pub-nav-dd-item-inner">
+                {iconUrl
+                  ? <span className="pub-nav-dd-ico" aria-hidden />
                   : <span className="pub-nav-dd-dot" aria-hidden />}
-                <span>{INDUSTRY_META[k]?.label || k}</span>
+                <span className="pub-nav-dd-label">{meta?.label||k}</span>
               </span>
             </a>
             );

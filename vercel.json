@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm run build --prefix m19-website",
+  "installCommand": "npm install && npm install --prefix m19-website",
+  "buildCommand": "npm run build",
   "outputDirectory": "m19-website/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
