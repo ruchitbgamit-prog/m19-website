@@ -4,6 +4,7 @@ import { MACHINE_IMAGE_MAP, PRODUCTS } from "../../data/products.js";
 import { productPathFromModel } from "../../data/productPaths.js";
 import { Btn, Eyebrow, Mono, Serif, UIIcon } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";
+import { PharmaIndustryPage } from "./PharmaIndustryPage.jsx";
 
 export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav,onProductNav}){
   const G={
@@ -241,6 +242,16 @@ export function BrochureIndustryPage({content,meta,onQuote,onRegister,onNav,onPr
 export function IndustryPage({industryKey,onQuote,onRegister,onNav,onProductNav}){
   const meta=INDUSTRY_META[industryKey]||{label:industryKey||"Industry",color:C.teal,glow:C.teal};
   const content=INDUSTRY_CONTENT?.[industryKey]||null;
+  if(content?.layout==="pharma"){
+    return (
+      <PharmaIndustryPage
+        meta={meta}
+        onQuote={onQuote}
+        onProductNav={onProductNav}
+        brochureUrl={content.brochureUrl}
+      />
+    );
+  }
   if(content&&(content.layout==="defense"||content.layout==="brochure")){
     return <BrochureIndustryPage content={content} meta={meta} onQuote={onQuote} onRegister={onRegister} onNav={onNav} onProductNav={onProductNav}/>;
   }

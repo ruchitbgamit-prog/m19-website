@@ -107,6 +107,7 @@ export default function App() {
                 onQuote={openQuote}
                 onRegister={openRegister}
                 onNav={handleNav}
+                onProductNav={navigateToProduct}
               />
             )}
             {pubPage === "about" && (

@@ -76,7 +76,7 @@ export const INDUSTRY_TO_MODELS = {
   // From the sheet: Water Puriication (7)
   "Water purification": ["LPA", "MPA", "NPA", "DPA", "GPA", "DA/PA", "SAA"],
 
-  // From the sheet: Pharma (2)
+  // Pharma landing: sterile filtration integrity + bioprocess membrane permeability
   Pharma: ["FIA", "LPA"],
 
   // From the sheet: Technical Textile (8)

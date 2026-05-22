@@ -193,4 +193,9 @@ export const INDUSTRY_CONTENT = {
       },
     ],
   },
+
+  Pharma: {
+    layout: "pharma",
+    brochureUrl: null,
+  },
 };

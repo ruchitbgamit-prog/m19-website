@@ -1,5 +1,8 @@
 import { MACHINE_IMAGE_MAP, PRODUCTS } from "../../data/products.js";
 import { HP500_PAGE } from "../../data/hp500Content.js";
+import { PHARMA_PRODUCT_FAQS } from "../../data/pharmaFaqs.js";
+import { FiaProductPage } from "./FiaProductPage.jsx";
+import { FaqAccordion } from "../../components/public/FaqAccordion.jsx";
 import { Btn, Eyebrow, Mono, Serif } from "../../components/ui/primitives.jsx";
 import { C } from "../../theme/colors.js";
 
@@ -51,6 +54,17 @@ export function GenericInstrumentProductPage({product,onQuote,onRegister,onNav})
             </div>
           </div>
         </div>
+        {PHARMA_PRODUCT_FAQS[product.model] && (
+          <div style={{marginTop:48,paddingTop:40,borderTop:"1px solid rgba(15,23,42,0.08)"}}>
+            <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:2,color:C.teal,textTransform:"uppercase",marginBottom:8}}>
+              FAQs
+            </div>
+            <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,fontWeight:700,color:C.navy,margin:"0 0 24px"}}>
+              {product.model} — common questions
+            </h2>
+            <FaqAccordion items={PHARMA_PRODUCT_FAQS[product.model]} variant="product" />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -339,7 +353,7 @@ export function HydrogenProductPage({product,onQuote,onRegister,onNav}){
   );
 }
 
-export function InstrumentProductPage({productModel,onQuote,onRegister,onNav}){
+export function InstrumentProductPage({productModel,onQuote,onRegister,onNav,onProductNav}){
   const product=PRODUCTS.find(p=>p.model===productModel);
   if(!product){
     return(
@@ -351,6 +365,15 @@ export function InstrumentProductPage({productModel,onQuote,onRegister,onNav}){
   }
   if(product.model==="HP500"){
     return <HydrogenProductPage product={product} onQuote={onQuote} onRegister={onRegister} onNav={onNav}/>;
+  }
+  if(product.model==="FIA"){
+    return (
+      <FiaProductPage
+        onQuote={onQuote}
+        onRegister={onRegister}
+        onNav={onNav}
+      />
+    );
   }
   return <GenericInstrumentProductPage product={product} onQuote={onQuote} onRegister={onRegister} onNav={onNav}/>;
 }
