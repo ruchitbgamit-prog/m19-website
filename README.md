@@ -2,6 +2,8 @@
 
 Marketing site and dashboards for M19 / PoreSense — React + Vite.
 
+**Current release: Version 2** — Pharma industry tab and FIA-100 product page. See [CHANGELOG.md](./CHANGELOG.md) for full v2 notes.
+
 ## Quick start
 
 ```bash
@@ -25,9 +27,16 @@ Open [http://localhost:5175](http://localhost:5175).
 - `vercel.json` — Vercel build/output and SPA rewrites
 - `_archive/` — Local legacy files (not in git)
 
+## Version 2 highlights
+
+| Page | Route |
+|------|--------|
+| Pharma industry tab | `/Industries/pharma` |
+| FIA product page | `/Products/FIA` |
+
 ## Deploy
 
-Configured for Vercel: build `m19-website`, output `m19-website/dist`.
+Configured for Vercel: build `m19-website`, output `m19-website/dist`. Production: [m19vision.vercel.app](https://m19vision.vercel.app).
 
 Lab Testing nav links to [m19lab.com](https://m19lab.com/Home/LabTest) (external).
 
