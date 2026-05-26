@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { LAB_TESTING_EXTERNAL_URL } from "../../config/site.js";
+import { PharmaHeroQuoteMenu } from "../../components/public/PharmaHeroQuoteMenu.jsx";
 import { PharmaClientsRibbon } from "../../components/public/PharmaClientsRibbon.jsx";
 import { PharmaProductMachinesGrid } from "../../components/public/PharmaProductMachinesGrid.jsx";
+import { PharmaTestimonialsCarousel } from "../../components/public/PharmaTestimonialsCarousel.jsx";
 import { FaqAccordion } from "../../components/public/FaqAccordion.jsx";
 import { PHARMA_PAGE } from "../../data/pharmaIndustryContent.js";
 import { PHARMA_INDUSTRY_FAQS } from "../../data/pharmaFaqs.js";
 import { Btn } from "../../components/ui/primitives.jsx";
-import { C } from "../../theme/colors.js";
 import "../../styles/pharmaIndustry.css";
 import "../../styles/instrumentProduct.css";
 
@@ -48,14 +49,12 @@ export function PharmaIndustryPage({ meta, onQuote, onProductNav, brochureUrl })
         {page.heroImage ? <div className="ph-hero-bg-overlay" aria-hidden /> : null}
         <div className="ph-shell ph-hero-layout">
           <div className="ph-hero-copy">
-            <div className="hero-eyebrow">
-              <div className="hero-eyebrow-dot" aria-hidden />
-              <span className="hero-eyebrow-text">{page.tag}</span>
-            </div>
             <h1 className="hero-h1 ph-hero-h1">
-              <em style={{ color: industryAccent }}>{page.heroTitle[0]}</em>
+              <em className="ph-hero-title-em" style={{ color: industryAccent }}>
+                {page.heroTitle[0]}
+              </em>
               <strong>{page.heroTitle[1]}</strong>
-              <span style={{ color: C.slate, fontWeight: 600 }}> {page.heroTitle[2]}</span>
+              <span className="ph-hero-title-end">{page.heroTitle[2]}</span>
             </h1>
             <p className="hero-sub">{page.heroDesc}</p>
             <div className="ph-hero-meta">
@@ -67,9 +66,7 @@ export function PharmaIndustryPage({ meta, onQuote, onProductNav, brochureUrl })
               ))}
             </div>
             <div className="ph-hero-actions hero-actions">
-              <Btn variant="gold" onClick={onQuote}>
-                Request a Quote →
-              </Btn>
+              <PharmaHeroQuoteMenu onQuote={onQuote} />
               <Btn
                 variant="ghost"
                 onClick={() =>
@@ -85,69 +82,52 @@ export function PharmaIndustryPage({ meta, onQuote, onProductNav, brochureUrl })
 
       <PharmaClientsRibbon />
 
-      <div id="instruments" className="ph-page-machines">
-        <PharmaProductMachinesGrid mode="industry" onProductNav={onProductNav} />
-      </div>
-
-      <section className="ph-shell ph-app-sec">
-        <div className="ph-sec-eyebrow">Applications</div>
-        <h2 className="ph-sec-title">
-          Where our instruments
-          <br />
-          <em>add critical value</em>
-        </h2>
-        <div className="ph-app-grid">
-          {page.applications.map((app) => (
-            <article key={app.title} className="ph-app-card">
-              <div className="ph-app-img">{app.icon}</div>
-              <div className="ph-app-body">
-                <h3>{app.title}</h3>
-                <p>{app.body}</p>
-              </div>
-            </article>
-          ))}
+      <div className="ph-page-body ph-page-body--light">
+        <div id="instruments" className="ph-page-machines">
+          <PharmaProductMachinesGrid mode="industry" onProductNav={onProductNav} />
         </div>
-      </section>
 
-      <section className="ph-shell ph-testimonials-sec">
-        <div className="ph-sec-eyebrow">Client results</div>
-        <h2 className="ph-sec-title">
-          What pharma manufacturers
-          <br />
-          <em>say about M19</em>
-        </h2>
-        <div className="ph-test-grid">
-          {page.testimonials.map((t) => (
-            <article key={t.initials} className="ph-test-card">
-              <div className="ph-test-stars">★★★★★</div>
-              <blockquote>{t.quote}</blockquote>
-              <div className="ph-test-meta">
-                <div className="ph-test-av">{t.initials}</div>
-                <div>
-                  <div className="ph-test-name">{t.name}</div>
-                  <div className="ph-test-role">{t.role}</div>
+        <section className="ph-shell ph-app-sec">
+          <div className="ph-sec-eyebrow">Applications</div>
+          <h2 className="ph-sec-title">
+            Where our instruments
+            <br />
+            <em>add critical value</em>
+          </h2>
+          <div className="ph-app-grid ph-app-grid--modern">
+            {page.applications.map((app) => (
+              <article key={app.title} className="ph-app-card ph-app-card--modern">
+                <div className="ph-app-card-accent" aria-hidden />
+                <div className="ph-app-icon-wrap">
+                  <span className="ph-app-icon" aria-hidden>
+                    {app.icon}
+                  </span>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+                <h3 className="ph-app-card-title">{app.title}</h3>
+                <p className="ph-app-card-text">{app.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="ph-compliance ph-compliance--compact">
-        <div className="ph-shell ph-compliance-inner">
-          <p className="ph-compliance-title">{page.compliance.heading}</p>
-          <p className="ph-compliance-tagline">{page.compliance.tagline}</p>
-        </div>
-      </section>
+        <PharmaTestimonialsCarousel />
 
-      <section className="ph-shell ph-faq-block" id="faqs">
-        <header className="ph-section-head ph-section-head--center">
-          <div className="ph-sec-eyebrow">FAQs</div>
-          <h2 className="ph-sec-title">Frequently asked questions</h2>
-          <p className="ph-section-lead">Everything you need to know about M19 pharmaceutical testing instruments.</p>
-        </header>
-        <FaqAccordion items={PHARMA_INDUSTRY_FAQS} variant="pharma" />
-      </section>
+        <section className="ph-compliance ph-compliance--compact">
+          <div className="ph-shell ph-compliance-inner">
+            <p className="ph-compliance-title">{page.compliance.heading}</p>
+            <p className="ph-compliance-tagline">{page.compliance.tagline}</p>
+          </div>
+        </section>
+
+        <section className="ph-shell ph-faq-block" id="faqs">
+          <header className="ph-section-head ph-section-head--center">
+            <div className="ph-sec-eyebrow">FAQs</div>
+            <h2 className="ph-sec-title">Frequently asked questions</h2>
+            <p className="ph-section-lead">Everything you need to know about M19 pharmaceutical testing instruments.</p>
+          </header>
+          <FaqAccordion items={PHARMA_INDUSTRY_FAQS} variant="pharma" />
+        </section>
+      </div>
 
       <section className="ph-cta">
         <div className="ph-shell ph-cta-inner">

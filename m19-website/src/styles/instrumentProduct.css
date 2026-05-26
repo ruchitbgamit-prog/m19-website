@@ -204,6 +204,31 @@
   box-shadow: inset 0 0 0 1px var(--ip-accent-mid);
 }
 
+.ip-machine-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ip-machine-card-top .ip-machine-idx {
+  margin-bottom: 0;
+}
+
+.ip-machine-model-pill {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--ip-accent);
+  background: var(--ip-accent-dim);
+  border: 1px solid var(--ip-accent-mid);
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
 .ip-machine-idx {
   font-family: "DM Mono", monospace;
   font-size: 10px;

@@ -1,82 +1,51 @@
-/* FIA product page — marketing hero + readable content */
+/* FIA product page — PDF brochure layout (light theme, pink accent) */
 
 .fia-page {
   padding-top: 72px;
   min-height: 100vh;
-  background: #061326;
-  color: #fff;
+  background: #fff;
+  color: #0b1220;
 }
 
 .fia-shell {
   max-width: 1180px;
   margin: 0 auto;
-  padding-left: clamp(20px, 5vw, 48px);
-  padding-right: clamp(20px, 5vw, 48px);
+  padding-left: clamp(20px, 4vw, 48px);
+  padding-right: clamp(20px, 4vw, 48px);
 }
 
-/* ── Top nav ── */
-.fia-top-nav {
-  position: sticky;
-  top: 72px;
-  z-index: 40;
-  background: rgba(6, 19, 38, 0.92);
-  border-bottom: 1px solid rgba(139, 173, 212, 0.12);
-  backdrop-filter: blur(10px);
-}
-
-.fia-top-nav-inner {
-  display: flex;
-  gap: 20px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-.fia-back {
-  font-family: "DM Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: rgba(139, 173, 212, 0.75);
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0;
-}
-
-.fia-back:hover {
-  color: #1fc1c6;
-}
-
-/* ── Marketing hero ── */
-.fia-mkt-hero {
+/* ── Hero ── */
+.fia-hero {
   position: relative;
   background-color: #0a1829;
   background-image: var(--fia-hero-bg);
   background-size: cover;
-  background-position: 72% center;
+  background-position: center;
   overflow: hidden;
 }
 
-.fia-mkt-overlay {
+.fia-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    95deg,
-    rgba(6, 19, 38, 0.92) 0%,
-    rgba(6, 19, 38, 0.78) 42%,
-    rgba(6, 19, 38, 0.35) 68%,
-    rgba(6, 19, 38, 0.15) 100%
+    100deg,
+    rgba(6, 19, 38, 0.94) 0%,
+    rgba(6, 19, 38, 0.82) 45%,
+    rgba(6, 19, 38, 0.45) 100%
   );
 }
 
-.fia-mkt-grid {
+.fia-hero-grid {
   position: relative;
   z-index: 1;
-  max-width: min(640px, 52vw);
-  padding: clamp(40px, 6vw, 64px) 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 42%);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  padding: clamp(48px, 7vw, 72px) 0 clamp(56px, 8vw, 80px);
 }
 
-.fia-mkt-eyebrow {
+.fia-hero-eyebrow {
   font-family: "DM Mono", monospace;
   font-size: 10px;
   letter-spacing: 2px;
@@ -86,43 +55,44 @@
   margin-bottom: 12px;
 }
 
-.fia-mkt-title {
+.fia-hero-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(28px, 4.2vw, 44px);
+  font-size: clamp(26px, 3.8vw, 42px);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.12;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  margin: 0 0 12px;
-  max-width: 520px;
+  color: #fff;
+  margin: 0 0 10px;
+  max-width: 560px;
 }
 
-.fia-mkt-tagline {
+.fia-hero-tagline {
   font-family: "DM Mono", monospace;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 18px;
 }
 
-.fia-mkt-bullets {
+.fia-hero-bullets {
   list-style: none;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   padding: 0;
   max-width: 520px;
 }
 
-.fia-mkt-bullets li {
+.fia-hero-bullets li {
   position: relative;
   padding-left: 22px;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
   font-size: 14px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
 }
 
-.fia-mkt-bullets li::before {
+.fia-hero-bullets li::before {
   content: "✓";
   position: absolute;
   left: 0;
@@ -130,37 +100,52 @@
   font-weight: 700;
 }
 
-.fia-mkt-cert-lbl {
+.fia-hero-cert-lbl {
   font-size: 12px;
-  color: rgba(139, 173, 212, 0.8);
-  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 8px;
 }
 
-.fia-mkt-certs {
+.fia-hero-certs {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
-.fia-mkt-cert {
+.fia-hero-cert {
   font-family: "DM Mono", monospace;
   font-size: 9px;
-  letter-spacing: 0.5px;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.4px;
+  padding: 7px 11px;
+  background: #fff;
   color: #0b2346;
   border-radius: 6px;
   font-weight: 600;
 }
 
-.fia-mkt-cta {
+.fia-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.fia-hero-visual img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.35));
+}
+
+/* ── Buttons ── */
+.fia-btn {
   display: inline-block;
   padding: 14px 28px;
   font-family: "DM Mono", monospace;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #fff;
   background: #ff0099;
@@ -170,419 +155,577 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.fia-mkt-cta:hover {
+.fia-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(255, 0, 153, 0.35);
+  box-shadow: 0 12px 28px rgba(255, 0, 153, 0.32);
 }
 
-.fia-mkt-cta--block {
+.fia-btn--block {
   width: 100%;
   text-align: center;
 }
 
-/* ── Stats strip ── */
-.fia-stats-strip {
-  background: #fff;
-  color: #0b2346;
-  border-bottom: 1px solid #e2e8f0;
+/* ── Stats (overlapping hero) ── */
+.fia-stats {
+  position: relative;
+  z-index: 2;
+  margin-top: -40px;
+  padding-bottom: 8px;
 }
 
-.fia-stats-inner {
+.fia-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding: 20px 0;
-  text-align: center;
+  gap: 16px;
+}
+
+.fia-stat-card {
+  border-radius: 12px;
+  padding: 22px 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.fia-stat-card--light {
+  background: #fff;
+  color: #0b2346;
+}
+
+.fia-stat-card--dark {
+  background: #0b1220;
+  color: #fff;
+  border-color: #0b1220;
+}
+
+.fia-stat-icon {
+  font-size: 22px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .fia-stat-val {
   font-family: "Cormorant Garamond", serif;
   font-size: 28px;
   font-weight: 700;
-  color: #061326;
+  line-height: 1;
 }
 
 .fia-stat-lbl {
   font-family: "DM Mono", monospace;
   font-size: 10px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #64748b;
-  margin-top: 4px;
+  margin: 6px 0 10px;
+  opacity: 0.85;
 }
 
-/* ── Main content ── */
-.fia-main {
-  padding: clamp(40px, 6vw, 56px) 0 clamp(48px, 7vw, 72px);
-  background: linear-gradient(180deg, #071a33 0%, #061326 100%);
+.fia-stat-body {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  opacity: 0.88;
 }
 
-.fia-main-grid {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: clamp(32px, 5vw, 48px);
-  align-items: start;
-}
-
-.fia-intro-card {
-  background: rgba(11, 35, 70, 0.5);
-  border: 1px solid rgba(139, 173, 212, 0.14);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 32px;
-}
-
-.fia-intro-lead {
-  font-size: 16px;
-  line-height: 1.7;
-  color: rgba(139, 173, 212, 0.9);
-  margin: 0 0 18px;
-}
-
-.fia-badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.fia-badge {
-  font-family: "DM Mono", monospace;
-  font-size: 9px;
-  padding: 5px 10px;
-  border-radius: 4px;
-  color: #1fc1c6;
-  background: rgba(31, 193, 198, 0.1);
-  border: 1px solid rgba(31, 193, 198, 0.28);
-}
-
-.fia-spec-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  background: rgba(139, 173, 212, 0.12);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.fia-spec-cell {
-  background: rgba(6, 19, 38, 0.6);
-  padding: 14px 16px;
-}
-
-.fia-spec-l {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #707070;
-  margin-bottom: 4px;
-}
-
-.fia-spec-v {
-  font-family: "DM Mono", monospace;
-  font-size: 12px;
-  color: #1fc1c6;
-  font-weight: 500;
+/* ── Body sections ── */
+.fia-body {
+  background: #fff;
 }
 
 .fia-sec {
-  margin-bottom: 36px;
-  padding-bottom: 36px;
-  border-bottom: 1px solid rgba(139, 173, 212, 0.1);
+  padding: clamp(48px, 6vw, 72px) 0;
 }
 
-.fia-sec:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+.fia-sec--experience {
+  background: #f8fafc;
+}
+
+.fia-sec--apart {
+  background: #fff;
+}
+
+.fia-sec--testimonials {
+  background: #f8fafc;
+}
+
+.fia-sec--support {
+  background: #fff;
+}
+
+.fia-sec--partners {
+  background: #f8fafc;
+  padding-bottom: 32px;
+}
+
+.fia-sec--expo {
+  background: #eceff3;
+}
+
+.fia-sec--faq {
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.fia-sec-eyebrow {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ff0099;
+  text-align: center;
+  margin: 0 0 14px;
 }
 
 .fia-sec-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(22px, 3vw, 28px);
+  font-size: clamp(24px, 3.2vw, 34px);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
-  margin: 0 0 14px;
+  text-align: center;
+  margin: 0 0 16px;
+  color: #0b1220;
 }
 
-.fia-sec-tagline {
-  font-family: "DM Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #1fc1c6;
-  margin: -6px 0 16px;
+.fia-sec-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 32px;
 }
 
-.fia-sec-p {
-  font-size: 15px;
-  line-height: 1.75;
-  color: rgba(139, 173, 212, 0.88);
-  margin: 0 0 14px;
-}
-
-.fia-app-chips {
+.fia-sec-cta-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.fia-app-chip {
-  font-size: 12px;
-  padding: 8px 14px;
-  border-radius: 4px;
-  border: 1px solid rgba(139, 173, 212, 0.2);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.fia-highlight-grid {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-}
-
-.fia-highlight-grid li {
-  font-size: 13px;
-  font-weight: 600;
-  padding: 12px 14px;
-  border-radius: 6px;
-  background: rgba(31, 193, 198, 0.08);
-  border: 1px solid rgba(31, 193, 198, 0.22);
-  color: #fff;
-}
-
-.fia-sec-note {
-  font-size: 14px;
-  color: #1fc1c6;
-  font-weight: 600;
-  margin: 16px 0 0;
-}
-
-.fia-bullet-list {
-  margin: 12px 0 0;
-  padding-left: 20px;
-}
-
-.fia-bullet-list li {
-  font-size: 14px;
-  line-height: 1.65;
-  color: rgba(139, 173, 212, 0.88);
-  margin-bottom: 8px;
-}
-
-.fia-bullet-list li::marker {
-  color: #ff0099;
-}
-
-.fia-clients-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.fia-client-chip {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(139, 173, 212, 0.18);
-  border-radius: 6px;
+  margin-top: 36px;
 }
 
-.fia-client-chip img {
-  height: 22px;
-  width: auto;
-  max-width: 100px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
+/* ── Experience cards ── */
+.fia-exp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: stretch;
 }
 
+.fia-exp-card {
+  background: #fff;
+  border: 1px solid rgba(255, 0, 153, 0.35);
+  border-radius: 12px;
+  padding: 0 0 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fia-exp-card-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.fia-exp-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fia-exp-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 16px 16px 10px;
+  line-height: 1.35;
+  color: #0b1220;
+}
+
+.fia-exp-list,
+.fia-exp-tests {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+}
+
+.fia-exp-list li,
+.fia-exp-tests li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.fia-exp-list li::before,
+.fia-exp-tests li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #ff0099;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.fia-exp-tests-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 14px 16px 8px;
+  color: #0b1220;
+}
+
+/* ── Differentiators ── */
+.fia-apart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.fia-apart-card {
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.fia-apart-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin: 0 0 8px;
+  color: #0b1220;
+}
+
+.fia-apart-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+/* ── Testimonials ── */
 .fia-test-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
 .fia-test-card {
   margin: 0;
-  padding: 22px;
-  background: rgba(11, 35, 70, 0.45);
-  border: 1px solid rgba(139, 173, 212, 0.14);
+  padding: 24px 20px;
+  background: #fff;
+  border: 1px solid rgba(255, 0, 153, 0.4);
   border-radius: 10px;
+  text-align: center;
 }
 
-.fia-test-stars {
-  color: #1fc1c6;
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-
-.fia-test-card p {
-  font-size: 14px;
-  font-style: italic;
-  line-height: 1.65;
-  color: rgba(139, 173, 212, 0.85);
-  margin: 0 0 16px;
-}
-
-.fia-test-card footer {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.fia-test-av {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(31, 193, 198, 0.15);
-  border: 1px solid rgba(31, 193, 198, 0.3);
+.fia-test-logo {
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: #1fc1c6;
-  flex-shrink: 0;
+  margin-bottom: 16px;
 }
 
-.fia-test-card footer strong {
-  display: block;
-  font-size: 13px;
+.fia-test-logo img {
+  max-height: 36px;
+  max-width: 120px;
+  object-fit: contain;
 }
 
-.fia-test-card footer em {
-  display: block;
-  font-size: 11px;
-  color: #707070;
-  font-style: normal;
-}
-
-.fia-page .prod-faq-item {
-  background: rgba(11, 35, 70, 0.45);
-  border-color: rgba(139, 173, 212, 0.14);
-}
-
-.fia-page .prod-faq-q {
-  color: #fff;
-}
-
-.fia-page .prod-faq-a p {
-  color: rgba(139, 173, 212, 0.85);
-}
-
-/* Sidebar */
-.fia-sidebar-sticky {
-  position: sticky;
-  top: 120px;
-}
-
-.fia-sidebar-card {
-  background: rgba(11, 35, 70, 0.65);
-  border: 1px solid rgba(139, 173, 212, 0.18);
-  border-radius: 12px;
-  padding: 24px;
-}
-
-.fia-sidebar-tag {
+.fia-test-logo span {
   font-family: "DM Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #1fc1c6;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.fia-test-card p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.55;
+  color: #334155;
+  margin: 0;
+}
+
+/* ── After-sales ── */
+.fia-support-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 42%);
+  gap: clamp(28px, 4vw, 48px);
+  align-items: start;
+}
+
+.fia-support-copy .fia-sec-title,
+.fia-support-copy .fia-sec-lead {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.fia-support-visual {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+.fia-support-visual img {
+  width: 100%;
+  height: auto;
   display: block;
+  object-fit: cover;
+}
+
+.fia-acc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fia-acc-trigger {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: #0b1220;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.fia-acc-item:not(.fia-acc-item--open) .fia-acc-trigger {
+  background: #94a3b8;
+}
+
+.fia-acc-body {
+  margin-top: -4px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #334155;
+  border: 1px solid rgba(255, 0, 153, 0.45);
+  border-radius: 0 0 8px 8px;
+  background: #fff;
+}
+
+/* ── Partners ── */
+.fia-partners-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.fia-partners-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px) clamp(32px, 4vw, 48px);
+}
+
+.fia-partner-logo {
+  width: 120px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.fia-partner-logo img {
+  max-width: 100%;
+  max-height: 40px;
+  object-fit: contain;
+}
+
+.fia-partner-logo span {
+  font-size: 10px;
+  text-align: center;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* ── Expo ── */
+.fia-expo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
   margin-bottom: 8px;
 }
 
-.fia-sidebar-card h3 {
+.fia-expo-item {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.fia-expo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Contact CTA ── */
+.fia-contact {
+  position: relative;
+  padding: clamp(56px, 7vw, 80px) 0;
+  overflow: hidden;
+}
+
+.fia-contact-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #0b1220 0%, #1e293b 100%);
+  background-image: url("/pharma/fia-product-lab.png");
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) brightness(0.35);
+}
+
+.fia-contact-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 420px);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: center;
+}
+
+.fia-contact-pitch h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: 26px;
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
+.fia-contact-pitch p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  max-width: 520px;
+}
+
+.fia-contact-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.fia-contact-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #0b1220;
+}
+
+.fia-contact-card-sub {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ff0099;
+  font-weight: 700;
   margin: 0 0 10px;
 }
 
-.fia-sidebar-card p {
+.fia-contact-card-note {
   font-size: 13px;
-  color: rgba(139, 173, 212, 0.8);
-  line-height: 1.6;
+  line-height: 1.55;
+  color: #64748b;
   margin: 0 0 16px;
 }
 
-.fia-bottom-cta {
-  background: rgba(11, 35, 70, 0.55);
-  border-top: 1px solid rgba(139, 173, 212, 0.14);
-  padding: 48px 0;
+.fia-spec-mini {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
 }
 
-.fia-bottom-cta-inner {
+.fia-spec-mini-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.fia-bottom-cta h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(22px, 3vw, 30px);
-  margin: 0 0 8px;
-}
-
-.fia-bottom-cta p {
-  color: rgba(139, 173, 212, 0.85);
-  margin: 0;
-  max-width: 480px;
-}
-
-.fia-bottom-ctas {
-  display: flex;
   gap: 12px;
-  flex-wrap: wrap;
+  padding: 10px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.fia-spec-mini-row:last-child {
+  border-bottom: none;
+}
+
+.fia-spec-mini-row span {
+  color: #64748b;
+}
+
+.fia-spec-mini-row strong {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: #0b2346;
+  text-align: right;
+}
+
+/* FAQ on light page */
+.fia-page .prod-faq-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.fia-page .prod-faq-q {
+  color: #0b1220;
+}
+
+.fia-page .prod-faq-a p {
+  color: #475569;
 }
 
 @media (max-width: 960px) {
-  .fia-mkt-grid {
-    max-width: none;
-  }
-
-  .fia-mkt-hero {
-    background-position: 65% center;
-  }
-
-  .fia-main-grid {
+  .fia-hero-grid {
     grid-template-columns: 1fr;
   }
 
-  .fia-sidebar-sticky {
-    position: static;
+  .fia-hero-visual {
+    order: -1;
   }
 
-  .fia-test-grid {
+  .fia-hero-visual img {
+    max-width: 280px;
+  }
+
+  .fia-stats-grid,
+  .fia-exp-grid,
+  .fia-apart-grid,
+  .fia-test-grid,
+  .fia-expo-grid {
     grid-template-columns: 1fr;
   }
 
-  .fia-stats-inner {
+  .fia-support-grid,
+  .fia-contact-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }
 
 @media (max-width: 640px) {
-  .fia-spec-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .fia-bottom-cta-inner {
-    flex-direction: column;
-    align-items: flex-start;
+  .fia-stats {
+    margin-top: -24px;
   }
 }

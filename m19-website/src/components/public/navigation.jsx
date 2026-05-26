@@ -74,7 +74,7 @@ export function PublicNav({page,onNav,onLogin,onRegister,onQuote}){
         <img className="pub-nav-logo-img" src="/assets/m19_logo_white.png" alt="M19" />
       </div>
       <div className="pub-nav-links">
-        {[["platform","Platform"],["instruments","Instruments"],["testing","Lab Testing"],["about","About"]].map(([k,l])=>
+        {[["home","Home"],["instruments","Instruments"],["testing","Lab Testing"],["about","About"]].map(([k,l])=>
           k==="testing" ? (
             <a key={k} className="pub-nav-link" href={LAB_TESTING_EXTERNAL_URL} rel="noopener noreferrer">
               {l}
@@ -86,6 +86,16 @@ export function PublicNav({page,onNav,onLogin,onRegister,onQuote}){
         <IndustryNavMenu triggerClassName={`pub-nav-link${page==="industry"?" active":""}`} />
         <div className="pub-nav-divider"/>
         <span className="pub-nav-link" onClick={onLogin} style={{color:C.white}}>Sign In</span>
+        <button
+          type="button"
+          className={`pub-nav-poresense${page==="platform"?" is-active":""}`}
+          onClick={()=>onNav("platform")}
+          aria-label="Open PoreSense platform"
+          title="PoreSense platform"
+        >
+          <span className="pub-nav-poresense-glow" aria-hidden />
+          <img className="pub-nav-poresense-img" src="/assets/poresense.png" alt="" decoding="async" />
+        </button>
       </div>
       <div style={{display:"flex",gap:8}}>
         <Btn variant="ghost" size="sm" onClick={onQuote}>Get Quote</Btn>

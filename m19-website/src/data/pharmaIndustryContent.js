@@ -11,8 +11,8 @@ export const PHARMA_CLIENTS = [
 
 export const PHARMA_PAGE = {
   tag: "Industry · Pharmaceuticals",
-  heroImage: "/pharma/fia-hero-lab.png",
-  heroImageAlt: "M19 Filter Integrity Analyzer (FIA-100) in a pharmaceutical laboratory",
+  heroImage: "/pharma/pharma-hero-banner.png",
+  heroImageAlt: "Advanced pharmaceutical manufacturing and laboratory testing environment",
   heroTitle: ["Pharma", "testing", "solutions."],
   heroDesc:
     "At M19 Lab, we assist pharmaceutical manufacturers in ensuring high-quality products with advanced testing instruments — addressing regulatory compliance, sterile filtration validation, and bioprocess membrane characterisation from R&D through commercial release.",
@@ -60,6 +60,27 @@ export const PHARMA_PAGE = {
       initials: "AM",
       name: "A. Mehta",
       role: "Plant Director, Solid Dosage",
+    },
+    {
+      quote:
+        "We run daily bubble-point and diffusion tests on multiple lines. The FIA-100's speed and audit trail cut our batch-release documentation time in half.",
+      initials: "SK",
+      name: "S. Kulkarni",
+      role: "Head of QC, Sterile Manufacturing",
+    },
+    {
+      quote:
+        "LPA data helped us compare UF membrane lots before tech transfer. Consistent permeability curves gave regulatory reviewers exactly what they needed.",
+      initials: "NJ",
+      name: "N. Joshi",
+      role: "Biologics R&D Lead",
+    },
+    {
+      quote:
+        "From quotation to IQ/OQ, M19 delivered on schedule. Their pharma specialists understand Annex 1 and USP expectations — not generic instrument sales.",
+      initials: "DR",
+      name: "D. Reddy",
+      role: "Validation Manager, Vaccines",
     },
   ],
   whatWeDo:

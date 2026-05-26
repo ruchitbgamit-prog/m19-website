@@ -1,5 +1,29 @@
 /** Block-grid cards for pharma product pages (reference: m19lab-pharma-v5 prod-grid). */
 
+/** Pharma industry landing — FIA + LPA only */
+export const PHARMA_INDUSTRY_MACHINE_BLOCKS = [
+  {
+    id: "fia",
+    model: "FIA",
+    index: "01 / 02",
+    std: "ASTM F316",
+    name: "Filter Integrity Analyzer",
+    desc: "Verifies filter effectiveness — bubble point, forward flow, and water intrusion. 5× faster with 21 CFR Part 11 compliance.",
+    specsMini: ["Model: FIA-100", "MFC Technology", "21 CFR Part 11", "2-Year Warranty"],
+    imageModel: "FIA",
+  },
+  {
+    id: "lpa",
+    model: "LPA",
+    index: "02 / 02",
+    std: "ISO 7231:2023",
+    name: "Liquid Permeability Analyzer",
+    desc: "Measures liquid flow through filter membranes under controlled pressure — MF, UF, NF, and bioprocess QA/QC.",
+    specsMini: ["Model: LP-100", "MF · UF · NF", "Controlled pressure"],
+    imageModel: "LPA",
+  },
+];
+
 export const PHARMA_PRODUCT_BLOCKS = [
   {
     id: "fia",

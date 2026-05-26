@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PRODUCTS, MACHINE_IMAGE_MAP, MACHINE_IMAGE_PRESENTATION } from "../../data/products.js";
 import { INDUSTRIES, INDUSTRY_TO_MODELS, INDUSTRY_META } from "../../data/industryClassification.js";
 import { productPathFromModel } from "../../data/productPaths.js";
@@ -13,7 +13,46 @@ export function InstrumentsPage({onQuote,onRegister,onProductNav,showFiaPowered=
     else window.location.assign(productPathFromModel(model));
   };
   const [flippedModel,setFlippedModel]=useState(null);
-  const [industry,setIndustry]=useState("All");
+  const industryList=useMemo(()=>INDUSTRIES.filter((i)=>i!=="All"),[]);
+  const [selectedIndustry,setSelectedIndustry]=useState(()=>(showIndustryFilter?INDUSTRIES.filter((i)=>i!=="All")[0]:null));
+  const [autoPaused,setAutoPaused]=useState(false);
+  const pillRefs=useRef({});
+  const pillsScrollRef=useRef(null);
+  const resumeAutoRef=useRef(null);
+
+  const AUTO_CYCLE_MS=1000;
+  const AUTO_RESUME_MS=5000;
+
+  useEffect(()=>{
+    if(!showIndustryFilter||autoPaused||industryList.length<2) return undefined;
+
+    const id=window.setInterval(()=>{
+      setSelectedIndustry((prev)=>{
+        const idx=industryList.indexOf(prev);
+        return industryList[(idx+1)%industryList.length];
+      });
+    },AUTO_CYCLE_MS);
+    return ()=>window.clearInterval(id);
+  },[showIndustryFilter,autoPaused,industryList]);
+
+  useEffect(()=>()=>{
+    if(resumeAutoRef.current) window.clearTimeout(resumeAutoRef.current);
+  },[]);
+
+  useEffect(()=>{
+    if(!showIndustryFilter||!selectedIndustry) return;
+    const pill=pillRefs.current[selectedIndustry];
+    if(!pill) return;
+    const scrollBehavior=autoPaused?"instant":"smooth";
+    pill.scrollIntoView({behavior:scrollBehavior,inline:"center",block:"nearest"});
+  },[selectedIndustry,showIndustryFilter,autoPaused]);
+
+  const selectIndustry=(industry)=>{
+    setSelectedIndustry(industry);
+    setAutoPaused(true);
+    if(resumeAutoRef.current) window.clearTimeout(resumeAutoRef.current);
+    resumeAutoRef.current=window.setTimeout(()=>setAutoPaused(false),AUTO_RESUME_MS);
+  };
   const industryIconMap={
     Defense:"Defense.png",
     Space:"Space Research.png",
@@ -37,41 +76,36 @@ export function InstrumentsPage({onQuote,onRegister,onProductNav,showFiaPowered=
     count:(INDUSTRY_TO_MODELS[i]||[]).length,
   }));
 
-  const allowedModels=useMemo(()=>{
-    if(!showIndustryFilter) return null;
-    const list=INDUSTRY_TO_MODELS[industry]||null;
-    if(!list) return null;
-    return new Set(list);
-  },[industry,showIndustryFilter]);
-
   const filteredProducts=useMemo(()=>{
     if(!showIndustryFilter) return PRODUCTS;
-    if(!allowedModels) return PRODUCTS;
-    return PRODUCTS.filter(p=>allowedModels.has(p.model));
-  },[allowedModels,showIndustryFilter]);
+    if(!selectedIndustry) return [];
+    const models=INDUSTRY_TO_MODELS[selectedIndustry]||[];
+    const allowed=new Set(models);
+    return PRODUCTS.filter((p)=>allowed.has(p.model));
+  },[selectedIndustry,showIndustryFilter]);
 
   return(
-    <div style={{paddingTop:72}}>
-      <div style={{background:`linear-gradient(160deg,${C.navy} 0%,${C.dark} 100%)`,padding:"80px 48px 60px"}}>
-        <div style={{maxWidth:1200,margin:"0 auto"}}>
+    <div className="instruments-page">
+      <section className="instruments-hero">
+        <div className="instruments-shell">
           <Eyebrow>Precision Instruments</Eyebrow>
-          <div className="hero-h1" style={{fontSize:"clamp(40px,5vw,72px)"}}>Powered by <span className="poresense-gradient">PoreSense™</span></div>
-          <p className="hero-sub" style={{marginTop:16,marginBottom:0}}>Every M19 instrument is connected to the PoreSense intelligence platform — built for regulated environments, designed to last.</p>
+          <div className="hero-h1 instruments-hero-title">Powered by <span className="poresense-gradient">PoreSense™</span></div>
+          <p className="hero-sub instruments-hero-sub">Every M19 instrument is connected to the PoreSense intelligence platform — built for regulated environments, designed to last.</p>
         </div>
-      </div>
-      <div style={{background:C.offwh,padding:"60px 48px"}}>
-        <div style={{maxWidth:1200,margin:"0 auto"}}>
+      </section>
+      <div className="instruments-body">
+        <div className="instruments-shell">
           {showIndustryFilter&&(
-            <>
+            <div className="instruments-industry-picker">
               {showIndustryClassification&&(
                 <div className="industry-grid" style={{marginTop:0,marginBottom:26}}>
-                  {industryCards.map(card=>(
+                  {industryCards.map((card)=>(
                     <button
                       key={card.key}
                       type="button"
                       className="industry-card"
-                      onClick={()=>setIndustry(card.key)}
-                      style={{"--industry-accent":card.accent,"--industry-glow":card.glow,appearance:"none",width:"100%",background:industry===card.key?"color-mix(in srgb, var(--industry-glow) 14%, rgba(255,255,255,0.03))":"rgba(255,255,255,0.92)"}}
+                      onClick={()=>selectIndustry(card.key)}
+                      style={{"--industry-accent":card.accent,"--industry-glow":card.glow,appearance:"none",width:"100%",background:selectedIndustry===card.key?"color-mix(in srgb, var(--industry-glow) 14%, rgba(255,255,255,0.03))":"rgba(255,255,255,0.92)"}}
                     >
                       <div className="industry-ico">
                         <img src={`/icons/${encodeURIComponent(card.icon)}`} alt={card.label} loading="lazy" decoding="async" />
@@ -82,59 +116,56 @@ export function InstrumentsPage({onQuote,onRegister,onProductNav,showFiaPowered=
                   ))}
                 </div>
               )}
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",gap:16,flexWrap:"wrap",marginBottom:18}}>
-                <div>
-                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:2,textTransform:"uppercase",color:"#667"}}>
-                    Filter by industry
-                  </div>
-                  <div style={{fontSize:13,color:"#2b3a4a",marginTop:6}}>
-                    Showing <strong>{filteredProducts.length}</strong> instruments
-                  </div>
-                </div>
-                <div style={{display:"flex",gap:8,flexWrap:"wrap",justifyContent:"flex-end"}}>
-                  {INDUSTRIES.map(i=>{
-                    const accent=(INDUSTRY_META?.[i]?.color)||C.teal;
-                    return(
+              <div className="instruments-industry-intro">
+                <p className="instruments-industry-prompt">
+                  {selectedIndustry ? (
+                    <>
+                      Instruments for{" "}
+                      <strong>{INDUSTRY_META?.[selectedIndustry]?.label || selectedIndustry}</strong>
+                    </>
+                  ) : (
+                    "Explore instruments by industry"
+                  )}
+                </p>
+                <p className="instruments-industry-guide">
+                  Click an industry to view its instruments 
+                </p>
+              </div>
+              <div
+                ref={pillsScrollRef}
+                className="instruments-industry-pills"
+                role="group"
+                aria-label="Select industry"
+              >
+                {industryList.map((i)=>{
+                  const accent=(INDUSTRY_META?.[i]?.color)||C.teal;
+                  const isActive=selectedIndustry===i;
+                  return(
                     <button
                       key={i}
+                      ref={(el)=>{if(el) pillRefs.current[i]=el;}}
                       type="button"
-                      onClick={()=>setIndustry(i)}
-                      style={{
-                        appearance:"none",
-                        border:"1px solid rgba(2,6,23,0.14)",
-                        background: i===industry ? "rgba(2,6,23,0.92)" : "rgba(255,255,255,0.9)",
-                        color: i===industry ? "#fff" : "#0b1220",
-                        padding:"10px 12px",
-                        borderRadius:999,
-                        fontSize:12,
-                        fontWeight:600,
-                        letterSpacing:0.2,
-                        cursor:"pointer",
-                        transition:"transform 160ms ease, background 160ms ease, border-color 160ms ease"
-                      }}
-                      onMouseEnter={e=>{
-                        if(i!==industry){
-                          e.currentTarget.style.transform="translateY(-1px)";
-                          e.currentTarget.style.borderColor=`${accent}66`;
-                        }
-                      }}
-                      onMouseLeave={e=>{
-                        e.currentTarget.style.transform="translateY(0)";
-                        e.currentTarget.style.borderColor="rgba(2,6,23,0.14)";
-                      }}
+                      className={`instruments-industry-pill${isActive?" is-active":""}`}
+                      aria-pressed={isActive}
+                      onClick={()=>selectIndustry(i)}
+                      style={{"--pill-accent":accent}}
                     >
-                      <span style={{display:"inline-flex",alignItems:"center",gap:8}}>
-                        <span aria-hidden style={{width:8,height:8,borderRadius:99,background:accent,boxShadow:"0 0 0 3px rgba(255,255,255,0.9)"}} />
-                        <span>{i}</span>
-                      </span>
+                      <span className="instruments-industry-pill-dot" aria-hidden />
+                      <span>{INDUSTRY_META?.[i]?.label||i}</span>
                     </button>
                   );
-                  })}
-                </div>
+                })}
               </div>
-            </>
+            </div>
           )}
-          <div className="product-grid">
+          {showIndustryFilter&&selectedIndustry&&filteredProducts.length===0?(
+            <p className="instruments-select-hint">No instruments are listed for this industry yet.</p>
+          ):null}
+          {(!showIndustryFilter||(selectedIndustry&&filteredProducts.length>0))&&(
+          <div
+            key={selectedIndustry||"all"}
+            className={`product-grid${showIndustryFilter?" product-grid--filtered":""}`}
+          >
             {filteredProducts.map(p=>{
               const machineImage=MACHINE_IMAGE_MAP[p.model]||null;
               const machinePresentation=MACHINE_IMAGE_PRESENTATION[p.model]||null;
@@ -249,6 +280,7 @@ export function InstrumentsPage({onQuote,onRegister,onProductNav,showFiaPowered=
               );
             })}
           </div>
+          )}
         </div>
       </div>
       {/* Developer-only: Apple-style scrollytelling */}

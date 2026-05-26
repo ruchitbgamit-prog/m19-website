@@ -221,9 +221,7 @@
   will-change: transform;
 }
 
-.ph-clients-ribbon-track:hover {
-  animation-play-state: paused;
-}
+/* Keep logos scrolling — no hover pause for smoother experience */
 
 @keyframes ph-clients-marquee {
   0% {
@@ -676,6 +674,8 @@
 .ph-hero--landing .ph-hero-layout {
   grid-template-columns: 1fr;
   max-width: 640px;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 /* Hero with lab photo background */
@@ -683,8 +683,13 @@
   background-color: #061326;
   background-image: var(--ph-hero-bg);
   background-size: cover;
-  background-position: 72% center;
+  background-position: center center;
   background-repeat: no-repeat;
+}
+
+.ph-hero--landing.ph-hero--bg {
+  min-height: clamp(440px, 54vh, 580px);
+  align-items: center;
 }
 
 .ph-hero-bg-overlay {
@@ -702,13 +707,25 @@
   );
 }
 
+.ph-hero--landing.ph-hero--bg .ph-hero-bg-overlay {
+  background: linear-gradient(
+    92deg,
+    rgba(3, 14, 32, 0.97) 0%,
+    rgba(5, 20, 45, 0.9) 32%,
+    rgba(7, 26, 52, 0.62) 52%,
+    rgba(8, 28, 55, 0.28) 68%,
+    transparent 88%
+  );
+}
+
 .ph-hero--bg .ph-hero-layout {
   position: relative;
   z-index: 2;
 }
 
 .ph-hero--bg .ph-hero-copy {
-  max-width: 560px;
+  max-width: min(580px, 48vw);
+  text-align: left;
 }
 
 .ph-page .ph-hero--landing .hero-eyebrow {
@@ -716,10 +733,38 @@
   padding: 4px 12px;
 }
 
+.ph-hero--landing.ph-hero--bg .hero-eyebrow {
+  background: rgba(4, 16, 36, 0.72);
+  border: 1px solid rgba(31, 193, 198, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.ph-hero--landing.ph-hero--bg .hero-eyebrow-text {
+  color: #5ee8ec;
+}
+
 .ph-page .ph-hero--landing .hero-h1 {
   font-size: clamp(36px, 5vw, 56px);
   line-height: 0.95;
   margin-bottom: 12px;
+  text-align: left;
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-h1 strong {
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-title-em {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-title-end {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  color: rgba(220, 238, 255, 0.98);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
 }
 
 .ph-page .ph-hero--landing .hero-sub {
@@ -729,16 +774,27 @@
   margin-bottom: 18px;
 }
 
+.ph-hero--landing.ph-hero--bg .hero-sub {
+  color: rgba(225, 236, 248, 0.92);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
 .ph-page .ph-hero--landing .ph-hero-meta {
   padding-top: 0;
   margin-top: 0;
   margin-bottom: 18px;
   border-top: none;
   gap: clamp(16px, 3vw, 28px);
+  justify-content: flex-start;
 }
 
 .ph-page .ph-hero--landing .ph-hero-meta-val {
   font-size: 18px;
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-meta-val {
+  color: #5ee8ec;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
 }
 
 .ph-page .ph-hero--landing .ph-hero-meta-lbl {
@@ -746,9 +802,159 @@
   margin-top: 2px;
 }
 
+.ph-hero--landing.ph-hero--bg .ph-hero-meta-lbl {
+  color: rgba(186, 210, 235, 0.9);
+}
+
 .ph-page .ph-hero--landing .ph-hero-actions.hero-actions {
   margin-bottom: 0;
   gap: 12px;
+  justify-content: flex-start;
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-actions .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+  background: rgba(4, 16, 36, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.ph-hero--landing.ph-hero--bg .ph-hero-actions .btn-ghost:hover {
+  border-color: #5ee8ec;
+  color: #5ee8ec;
+  background: rgba(4, 16, 36, 0.55);
+}
+
+/* ── Hero: Request a Quote machine dropdown ── */
+.ph-quote-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.ph-quote-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.ph-quote-menu-arrow {
+  transition: transform 0.02s ease;
+}
+
+.ph-quote-menu-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 40;
+  min-width: min(320px, 88vw);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 18px 48px rgba(2, 6, 23, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 0.02s ease,
+    transform 0.02s ease,
+    visibility 0.02s ease;
+}
+
+.ph-quote-menu:hover .ph-quote-menu-panel,
+.ph-quote-menu:focus-within .ph-quote-menu-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.ph-quote-menu:hover .ph-quote-menu-arrow,
+.ph-quote-menu:focus-within .ph-quote-menu-arrow {
+  transform: rotate(90deg);
+}
+
+.ph-quote-menu-label {
+  margin: 0 0 8px;
+  padding: 0 10px;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.ph-quote-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ph-quote-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.ph-quote-menu-item:hover {
+  background: rgba(10, 107, 108, 0.08);
+}
+
+.ph-quote-menu-item-model {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #0a6b6c;
+}
+
+.ph-quote-menu-item-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0b2346;
+  line-height: 1.2;
+}
+
+.ph-quote-menu-item-std {
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.ph-quote-menu-all {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 10px;
+  border: none;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  background: transparent;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ph-industry, #ff0099);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.ph-quote-menu-all:hover {
+  background: rgba(255, 0, 153, 0.06);
 }
 
 /* ── Hero right column: smart cards over background ── */
@@ -1253,18 +1459,24 @@
   .ph-hero--landing .ph-hero-layout {
     grid-template-columns: 1fr;
     max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ph-hero--bg .ph-hero-copy {
+    max-width: 100%;
   }
 
   .ph-hero--bg {
     background-position: 65% center;
   }
 
-  .ph-hero-bg-overlay {
+  .ph-hero--landing.ph-hero--bg .ph-hero-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(6, 19, 38, 0.92) 0%,
-      rgba(6, 19, 38, 0.75) 45%,
-      rgba(6, 19, 38, 0.5) 100%
+      rgba(3, 14, 32, 0.96) 0%,
+      rgba(5, 20, 45, 0.88) 40%,
+      rgba(7, 26, 52, 0.65) 100%
     );
   }
 
@@ -1536,17 +1748,384 @@
 
 @media (max-width: 900px) {
   .ph-app-grid,
-  .ph-test-grid {
+  .ph-test-grid,
+  .ph-page .ph-page-body--light .ph-app-grid--modern {
     grid-template-columns: 1fr;
   }
 
-  .ph-page .ip-machines-grid {
+  .ph-page .ip-machines-grid,
+  .ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machines-grid {
     grid-template-columns: 1fr;
+    max-width: none;
   }
 }
 
-@media (max-width: 900px) and (min-width: 641px) {
-  .ph-page .ip-machines-grid {
-    grid-template-columns: 1fr 1fr;
+/* ── Light body (from instruments section down) ── */
+.ph-page-body--light {
+  background: #ffffff;
+  color: #0b2346;
+}
+
+.ph-page-body--light .ph-sec-eyebrow {
+  color: #0a6b6c;
+  font-weight: 500;
+}
+
+.ph-page-body--light .ph-sec-title {
+  color: #0b2346;
+  font-weight: 600;
+}
+
+.ph-page-body--light .ph-sec-title em {
+  color: var(--ph-industry, #ff0099);
+  font-style: italic;
+}
+
+.ph-page-body--light .ph-section-lead {
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.ph-page-body--light .ph-page-machines {
+  background: transparent;
+}
+
+/* Higher specificity than instrumentProduct.css dark overrides */
+.ph-page .ph-page-body--light .ip-machines-sec--industry {
+  --ip-accent: #0a6b6c;
+  --ip-accent-dim: rgba(10, 107, 108, 0.1);
+  --ip-accent-mid: rgba(10, 107, 108, 0.35);
+  --ip-border: rgba(15, 23, 42, 0.12);
+  --ip-border2: #94a3b8;
+  --ip-muted: #64748b;
+  --ip-muted2: #334155;
+  --ip-surface: #ffffff;
+  --ip-surface2: #f1f5f9;
+}
+
+/* ── Modern instrument cards (pharma industry) ── */
+.ph-page .ph-page-body--light .ip-machines-sec--industry .ip-machines-eyebrow {
+  color: #0a6b6c;
+  font-weight: 500;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--industry .ip-machines-title {
+  color: #0b2346;
+  font-weight: 700;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--industry .ip-machines-title span {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--industry .ip-machines-note {
+  color: #475569;
+  font-size: 14px;
+  max-width: 280px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machines-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 28px);
+  max-width: 100%;
+  background: transparent;
+  border: none;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-card--modern {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  padding: clamp(22px, 3vw, 30px);
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-card--modern::before {
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(90deg, var(--ph-industry, #ff0099) 0%, #0a6b6c 100%);
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-card--modern:hover {
+  transform: translateY(-6px);
+  background: #ffffff;
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.12);
+  border-color: rgba(10, 107, 108, 0.22);
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-idx {
+  color: #94a3b8;
+  margin-bottom: 0;
+  font-size: 11px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-model-pill {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #0a6b6c;
+  background: rgba(10, 107, 108, 0.1);
+  border: 1px solid rgba(10, 107, 108, 0.2);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-visual {
+  height: clamp(160px, 22vw, 200px);
+  border-radius: 12px;
+  background: linear-gradient(165deg, #f8fafc 0%, #eef2f7 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  margin-bottom: 20px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-visual img {
+  max-height: 85%;
+  filter: drop-shadow(0 8px 16px rgba(15, 23, 42, 0.08));
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-std {
+  color: #0a6b6c;
+  font-weight: 600;
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-name {
+  color: #0b2346;
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-desc {
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-spec-mini {
+  color: #475569;
+  border-color: rgba(15, 23, 42, 0.12);
+  background: #f8fafc;
+  font-size: 10px;
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-link {
+  color: #0a6b6c;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.ph-page .ph-page-body--light .ip-machines-sec--pharma-two .ip-machine-card--modern:hover .ip-machine-link {
+  color: var(--ph-industry, #ff0099);
+  gap: 12px;
+}
+
+/* ── Modern application cards ── */
+.ph-page .ph-page-body--light .ph-app-sec {
+  padding-top: clamp(48px, 7vw, 72px);
+}
+
+.ph-page .ph-page-body--light .ph-app-grid--modern {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 24px);
+  margin-top: 36px;
+}
+
+.ph-page .ph-page-body--light .ph-app-card--modern {
+  position: relative;
+  padding: 28px 26px 26px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+  overflow: visible;
+}
+
+.ph-page .ph-page-body--light .ph-app-card--modern:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.1);
+  border-color: rgba(10, 107, 108, 0.2);
+}
+
+.ph-app-card-accent {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, var(--ph-industry, #ff0099), #0a6b6c);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ph-app-card--modern:hover .ph-app-card-accent {
+  opacity: 1;
+}
+
+.ph-app-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(10, 107, 108, 0.12), rgba(255, 0, 153, 0.06));
+  border: 1px solid rgba(10, 107, 108, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.ph-app-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.ph-page .ph-page-body--light .ph-app-card-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(18px, 2vw, 21px);
+  font-weight: 700;
+  color: #0b2346;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+.ph-page .ph-page-body--light .ph-app-card-text {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.ph-page-body--light .ph-compliance--compact {
+  background: #eef2f7;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.ph-page-body--light .ph-compliance-title {
+  color: #0b2346;
+}
+
+.ph-page-body--light .ph-compliance-tagline {
+  color: #64748b;
+}
+
+.ph-page-body--light .ph-faq-q {
+  color: #0b2346;
+  background: #fff;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.ph-page-body--light .ph-faq-a {
+  color: #475569;
+  background: #fff;
+}
+
+.ph-page-body--light .ph-faq-a p {
+  color: #475569;
+}
+
+/* ── Testimonials marquee ── */
+.ph-test-marquee-wrap {
+  margin-top: 32px;
+}
+
+.ph-test-marquee-viewport {
+  overflow: hidden;
+  padding: 8px 0 16px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+}
+
+.ph-test-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: ph-test-marquee 55s linear infinite;
+  will-change: transform;
+}
+
+/* Continuous testimonial scroll — no hover pause */
+
+@keyframes ph-test-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ph-page-body--light .ph-testimonials-sec {
+  padding-bottom: clamp(48px, 7vw, 64px);
+}
+
+.ph-page-body--light .ph-test-card {
+  flex: 0 0 min(360px, 88vw);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+}
+
+.ph-page-body--light .ph-test-card::after {
+  color: rgba(13, 122, 123, 0.12);
+}
+
+.ph-page-body--light .ph-test-card blockquote {
+  color: #334155;
+}
+
+.ph-page-body--light .ph-test-name {
+  color: #0b2346;
+}
+
+.ph-page-body--light .ph-test-role {
+  color: #64748b;
+}
+
+.ph-page-body--light .ph-test-stars {
+  color: #0d7a7b;
+}
+
+.ph-page-body--light .ph-test-av {
+  background: rgba(13, 122, 123, 0.1);
+  border-color: rgba(13, 122, 123, 0.25);
+  color: #0d7a7b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-test-marquee-viewport {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .ph-test-marquee-track {
+    animation: none;
+    flex-wrap: nowrap;
+    padding: 0 clamp(20px, 5vw, 48px);
   }
 }

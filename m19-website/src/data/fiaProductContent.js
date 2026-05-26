@@ -3,10 +3,10 @@
 export const FIA_PAGE = {
   tag: "ASTM F316",
   eyebrow: "Filter Testing · Sterility Assurance",
-  title: ["Filter Integrity", "Analyzer"],
   modelLabel: "MODEL: FIA-100",
   marketing: {
     heroBg: "/pharma/fia-product-lab.png",
+    productImage: "/assets/filter_integrity_analyzer_clean.png",
     heroTitle: "The world's most advanced filter integrity analyzer",
     tagline: "For compliant, fast, and accurate validation",
     bullets: [
@@ -14,15 +14,185 @@ export const FIA_PAGE = {
       "Built for pharmaceutical & biotechnology industries",
       "Full 21 CFR Part 11 validation with comprehensive audit trail",
       "ARM7 processor — analysis up to 5× faster with MFC precision",
+      "Precise, trusted, and user-friendly operation",
     ],
     certLabel: "Trusted and certified by:",
     certifications: ["ASTM F316", "USP <1207>", "21 CFR Part 11", "GAMP 5", "PDA TR 26"],
     statsStrip: [
-      { value: "10+", label: "Years of trust" },
-      { value: "15+", label: "Industries served" },
-      { value: "24×7", label: "After-sales support" },
+      {
+        value: "10+",
+        label: "Years of trust",
+        body: "Decades of R&D expertise delivering scientific instruments and full validation services.",
+        icon: "🤝",
+        variant: "light",
+      },
+      {
+        value: "15+",
+        label: "Industries served",
+        body: "From pharma to food & beverage, water & air filtration, technical textiles, and chemicals.",
+        icon: "🏭",
+        variant: "light",
+      },
+      {
+        value: "24×7",
+        label: "After-sales support",
+        body: "Priority response and spare-parts assurance to minimize downtime risk.",
+        icon: "🕐",
+        variant: "dark",
+      },
     ],
     demoCtaLabel: "Get a free demo",
+  },
+  experience: {
+    eyebrow: "Experience the M19 Filter Integrity Analyzer",
+    lead:
+      "The M19 Filter Integrity Analyzer (FIA-100) delivers high-precision gas flow and pressure measurement for filter testing and validation — engineered for regulated environments where sterility assurance and documented results matter.",
+    cards: [
+      {
+        id: "precision",
+        title: "High-precision M19 filter integrity analyzer",
+        image: "/pharma/fia-marketing-banner.png",
+        bullets: ["21 CFR Part 11 compliant", "5× faster testing", "2-year extended warranty"],
+        testsLabel: "Compatible with multiple tests",
+        tests: [
+          "Bubble point test",
+          "Forward flow test",
+          "Water intrusion test",
+          "Pressure decay test",
+          "Combined forward flow + bubble point",
+          "Automated pre & post-use checks",
+        ],
+      },
+      {
+        id: "features",
+        title: "Key features",
+        image: "/assets/filter_integrity_analyzer_clean.png",
+        bullets: [
+          '15" color LCD touch screen',
+          "Unlimited data storage",
+          "PC-enabled with LAN connectivity",
+          "Integrated testing methods",
+          "Bubble point: 50–8000 ± 50 mbar",
+          "Forward flow: 0.1–1000 ± 0.1 mL/min",
+          "Water intrusion: 0.01–100 ± 0.01 mL/min",
+          "Pressure decay: 50–2500 ± 1 mbar",
+          "Built-in thermal printer or network/PDF exports",
+        ],
+      },
+      {
+        id: "assurance",
+        title: "Your assurance matters",
+        image: "/pharma/fia-hero-lab.png",
+        bullets: [
+          "5× faster results",
+          "21 CFR Part 11 compliant with audit trail",
+          "Multiple user access levels (Operator, Supervisor, Administrator)",
+          "Fast installation, IQ/OQ support, training, and intelligent method setup",
+          "IQ/OQ documentation and M19 expert support for seamless validation",
+          "2-year warranty with spare-parts assurance",
+        ],
+      },
+    ],
+  },
+  differentiators: {
+    title: "What sets us apart?",
+    items: [
+      {
+        title: "Validation-first service",
+        body: "Installation, operator training, IQ/OQ assistance, on-site calibration, and AMC by trained M19 technicians across India.",
+      },
+      {
+        title: "Global trust, local presence",
+        body: "Registered offices and direct contacts in India and the USA for faster procurement and support.",
+      },
+      {
+        title: "End-to-end operational safety",
+        body: "Two-year extended warranty, stocked inventory, and preventive maintenance to keep lines validated and running.",
+      },
+      {
+        title: "Compliance and data integrity",
+        body: "21 CFR Part 11 compliant software with audit trail features, plus unlimited results and user storage for scale.",
+      },
+      {
+        title: "Audit-ready validation packs",
+        body: "Complete DQ/IQ/OQ/PQ documentation with calibration certificates for faster QA sign-offs.",
+      },
+      {
+        title: "Engineered in New York, manufactured in India",
+        body: "Local manufacturing and stocked spares ensure shorter lead times, INR billing, and zero overseas delays.",
+      },
+    ],
+  },
+  testimonials: [
+    {
+      quote:
+        "M19 FIA has met our expectations in terms of performance and reliability. Overall, it's a dependable solution for our filtration integrity testing.",
+      company: "Cipla",
+      logo: "/pharma/clients/cipla.svg",
+    },
+    {
+      quote:
+        "Our experience with M19 FIA is very positive. I believe it's a good solution for us.",
+      company: "Lupin",
+      logo: "/pharma/clients/lupin.svg",
+    },
+    {
+      quote:
+        "I was extremely impressed with the M19 FIA. It's a definite fit in our operations.",
+      company: "Emcure",
+      logo: null,
+    },
+  ],
+  afterSales: {
+    title: "24×7 after-sales support",
+    lead:
+      "Our engineers anticipate and resolve issues quickly, coordinate with your team end-to-end, and keep validation activities and daily operations reliably on track.",
+    image: "/pharma/pharma-hero-banner.png",
+    items: [
+      {
+        title: "India-based engineering team with 10+ years' experience",
+        body: "Our field engineers average a decade in integrity testing and validation. They handle installation, training, and troubleshooting to get you back online fast.",
+      },
+      {
+        title: "Priority response and same-day restoration",
+        body: "Domestic spare parts and escalation paths mean most issues are diagnosed and resolved without waiting on overseas shipments.",
+      },
+      {
+        title: "Calibration and qualification resources",
+        body: "Scheduled calibration, IQ/OQ documentation support, and traceable certificates aligned to your SOPs and audit calendar.",
+      },
+      {
+        title: "Remote diagnostics and secure updates",
+        body: "Remote support sessions and controlled software updates help maintain compliance while minimizing on-site visits.",
+      },
+      {
+        title: "Rapid onboarding and SOP alignment",
+        body: "Method templates, user training, and workflow mapping so your team adopts FIA-100 with minimal disruption to batch release.",
+      },
+    ],
+  },
+  partners: {
+    title: "Trusted by industry leaders",
+    lead:
+      "Trusted globally by top pharma and research labs, the M19 Filter Integrity Analyzer delivers uncompromising accuracy for critical steps, preserves sterility, and provides the documented results regulators expect.",
+    clients: ["Sun Pharma", "Cipla", "Lupin", "Zydus", "Gennova", "Reliance", "Zeiss Pharmaceuticals", "Suyash"],
+  },
+  expo: {
+    title: "Expo and events",
+    images: [
+      { src: "/pharma/fia-hero-lab.png", alt: "M19 team at industry exhibition" },
+      { src: "/pharma/fia-product-lab.png", alt: "M19 FIA demonstration at trade show" },
+      { src: "/pharma/pharma-hero-banner.png", alt: "M19 booth at pharma conference" },
+    ],
+  },
+  bottomCta: {
+    title: "Still struggling to choose the right instrument for your filter integrity testing needs?",
+    lead: "We're here to guide you. Our experts will help you make the right choice with a free personalized online or on-site demo of the equipment.",
+    formTitle: "Connect with our industry experts",
+    formSubtitle: "Get a free quote / online demo",
+    formNote: "Ready to move forward? Connect with our experts for a personalized demo, guide, or consultation. We guarantee a response within 24 hours.",
+    ctaLabel: "Talk to our experts",
+    quoteLabel: "Get your quote today",
   },
   subtitle:
     "The M19 Filter Integrity Analyzer (FIA-100) is engineered for high-precision gas flow and pressure measurement in pharmaceutical filter testing and validation.",
@@ -35,88 +205,6 @@ export const FIA_PAGE = {
     "2-Year Warranty",
     "ARM7 32-bit Processor",
   ],
-  demoCtaLabel: "Request a Quote →",
-  sections: [
-    {
-      id: "technology",
-      title: "Technology",
-      paragraphs: [
-        "The M19 Filter Integrity Analyzer (FIA-100) is a next-generation Filter Integrity Analyzer engineered for high-precision gas flow and pressure measurement in filter testing & validation. Unlike conventional volume-based or pressure decay methods, it leverages cutting-edge Mass Flow Controller (MFC) technology for exceptional accuracy, stability, and real-time responsiveness.",
-        "M19's proprietary MFC-based approach eliminates inaccuracies, ensuring superior reproducibility even at ultra-low flow rates. Equipped with automated self-calibration, it adjusts for environmental factors and filter variations, delivering consistent results without manual recalibration.",
-        "Ideal for Bubble Point Testing, Forward Flow Testing, Water Intrusion, and Pressure Decay Tests, the M19 FIA streamlines filter integrity validation, aiding Sterility Assurance, Product Quality, and Regulatory Compliance in pharmaceutical manufacturing and biotechnology.",
-      ],
-    },
-    {
-      id: "applications",
-      title: "Applications",
-      items: [
-        "Cartridge Filter",
-        "Capsule Filter",
-        "Syringe Filter",
-        "Flat Sheet",
-        "TFF",
-        "Bag Filter",
-      ],
-    },
-    {
-      id: "design",
-      title: "Cutting Edge Design",
-      tagline: "Simple · Intelligent · More Integrated",
-      paragraphs: [
-        "Lightweight, compact, and ergonomically designed, the M19 FIA-100 features a revolutionary 15\" touchscreen interface that simplifies operation and requires minimal user training. Enhanced pressure and flow control systems guarantee measurement precision while significantly reducing test durations.",
-        "Available in aluminum or stainless steel variants, it includes real-time remote support, USB connectivity, and remote-control automation for unmatched flexibility. Engineered for negligible maintenance costs and domestic manufacturing in India and USA to eliminate downtime with quick service support.",
-      ],
-      highlights: [
-        "Modern User Interface",
-        "Light Weight & Portable",
-        "IP65 Rated & GAMP 5 Compliant",
-      ],
-      note: "2-Year Extended Warranty Available — Ensuring long-term reliability and peace of mind.",
-    },
-    {
-      id: "software",
-      title: "Advanced Software",
-      tagline: "AI Based · Dynamic Reports · Easy to Use",
-      paragraphs: [
-        "Experience unprecedented visualization and collaboration with the M19 cognitive software control program. AI-driven features virtually eliminate user bias in data acquisition and interpretation, redefining how your team generates and consumes data.",
-        "Unlimited data and user storage, audit trails, and electronic signatures ensure 21 CFR Part 11 compliance. Supports PLC/SCADA integration for remote operation and automated data transfer.",
-      ],
-    },
-    {
-      id: "key-features",
-      title: "Key Features",
-      bullets: [
-        "Three user levels (Operator, Supervisor, Administrator) with secure access",
-        "Versatile connectivity: USB, Ethernet, Wireless LAN",
-        "Flexible printing: Built-in thermal printer or network/PDF exports",
-      ],
-    },
-    {
-      id: "computing",
-      title: "High Performance Computing",
-      tagline: "Increased Precision · Accuracy · Reproducibility",
-      paragraphs: [
-        "Powered by cutting-edge ARM7 32-bit processors, the M19 FIA delivers consistent, reliable results across all platforms. With proprietary MFC based system, intelligent test algorithms, it sets a new standard for filter characterization in pharmaceutical integrity testing.",
-        "Domestic supply chain ensures rapid service and no downtime, backed by global calibration centers.",
-      ],
-    },
-  ],
-  testimonials: [
-    {
-      quote:
-        "The FIA-100 transformed our sterile filtration validation. Audit-ready reports in minutes — we passed our FDA audit without a single observation on data integrity.",
-      initials: "RK",
-      name: "R. Kumar",
-      role: "QA Manager, Injectable Formulations",
-    },
-    {
-      quote:
-        "5× faster than our previous imported tester. Domestic support means any issue is resolved same day. Best capital equipment decision we made this year.",
-      initials: "AM",
-      name: "A. Mehta",
-      role: "Plant Director, Sterile Manufacturing",
-    },
-  ],
   specs: {
     rows: [
       { l: "Standard", v: "ASTM F316" },
@@ -127,7 +215,6 @@ export const FIA_PAGE = {
       { l: "Enclosure", v: "IP65 Rated" },
     ],
   },
-  clients: ["Sun Pharma", "Cipla", "Zydus", "Reliance", "Gennova", "Zeiss Pharmaceuticals", "Suyash"],
   faq: [
     {
       q: "What test types does FIA-100 support?",
@@ -154,10 +241,6 @@ export const FIA_PAGE = {
       a: "On-site installation, operator training, IQ/OQ documentation, extended warranty, domestic spare parts, remote support, and global calibration centres.",
     },
   ],
-  bottomCta: {
-    title: "Ready to validate your sterile filtration program?",
-    lead: "Request a quote, configuration guidance, or IQ/OQ documentation — response within 24 business hours.",
-  },
   seo: {
     title: "FIA Filter Integrity Analyzer — M19 | Pharma & GMP",
     description:
